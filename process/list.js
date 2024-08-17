@@ -1,23 +1,23 @@
 const fs = require('fs');
+const path = require('path');
+
+// Define the path to the ecosystem.json file
+const filePath = path.resolve(__dirname, '../ecosystem.json');
 
 // Read the ecosystem.json file
-fs.readFile('../ecosystem.json', 'utf8', (err, data) => {
-
+fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
         console.error('Error reading the file:', err);
         return;
     }
-    let partners = [];
+
     try {
         const ecosystem = JSON.parse(data);
-        const projects = Object.keys(ecosystem);
+        const partners = Object.keys(ecosystem);
 
         console.log('List of projects:');
-        projects.forEach((project) => {
-            partners.push(project);
-        });
+        console.log(partners.join('\n'));
     } catch (error) {
         console.error('Error parsing JSON:', error);
     }
-    console.log(partners.join('\n'));
 });
